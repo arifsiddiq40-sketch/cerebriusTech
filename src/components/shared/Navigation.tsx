@@ -19,29 +19,30 @@ const Navigation = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
+    <nav className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50 animate-slide-in-down">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
+          <Link to="/" className="flex items-center space-x-2 group hover-scale">
             <div className="relative">
-              <Shield className="h-8 w-8 text-primary" />
-              <Brain className="h-4 w-4 text-secondary absolute -top-1 -right-1" />
+              <Shield className="h-8 w-8 text-primary group-hover:animate-rotate-360 transition-all duration-300" />
+              <Brain className="h-4 w-4 text-secondary absolute -top-1 -right-1 group-hover:animate-wiggle transition-all duration-300" />
             </div>
-            <span className="text-xl font-bold text-primary group-hover:text-gradient-cyber transition-colors">
+            <span className="text-xl font-bold text-primary group-hover:text-gradient-cyber transition-all duration-300">
               CerebriusTech
             </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
+            {navItems.map((item, index) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-sm font-medium transition-colors hover:text-secondary ${
+                className={`text-sm font-medium transition-all duration-300 hover:text-secondary hover:scale-105 ${
                   isActive(item.path) ? "text-secondary" : "text-muted-foreground"
-                }`}
+                } animate-fade-in-up`}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {item.name}
               </Link>
@@ -50,10 +51,10 @@ const Navigation = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" asChild>
+            <Button variant="ghost" asChild className="hover-lift">
               <Link to="/contact">Contact Us</Link>
             </Button>
-            <Button className="glow-cyan">
+            <Button className="glow-cyan hover-glow hover-scale">
               <Link to="/contact">Book a Demo</Link>
             </Button>
           </div>
